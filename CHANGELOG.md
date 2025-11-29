@@ -5,9 +5,65 @@ All notable development progress for this project will be documented in this fil
 ## [Unreleased]
 
 ### Planned Next
-- Build admin dashboard with post list (from Firestore)
-- Create post editor form with image upload
+- Add image upload to Firebase Storage
 - Implement public blog homepage and post view
+
+---
+
+## 2025-11-29 - Session 4: Admin Dashboard & Post Editor
+
+### Added
+- **Post Types** (`src/lib/types.ts`):
+  - `Post` interface matching Firestore schema
+  - `PostStatus` type ('draft' | 'published')
+  - `CreatePostData` and `UpdatePostData` interfaces
+- **Firestore Posts Service** (`src/lib/posts.ts`):
+  - `getAllPosts()` - fetch all posts for admin
+  - `getPublishedPosts()` - fetch published posts for public blog
+  - `getPostBySlug()` - fetch single post by URL slug
+  - `getPostById()` - fetch single post by document ID
+  - `createPost()` - create new post
+  - `updatePost()` - update existing post
+  - `deletePost()` - delete post
+- **Slug Utility** (`src/lib/slug.ts`):
+  - `generateSlug()` - convert title to URL-friendly slug
+  - `isValidSlug()` - validate slug format
+- **PostList Component** (`src/components/admin/PostList.tsx`):
+  - Displays posts with status badges (Published/Draft)
+  - Shows last modified date
+  - Edit and Delete actions with 44px touch targets
+  - Empty state with link to create first post
+  - Mobile-responsive layout
+- **PostForm Component** (`src/components/admin/PostForm.tsx`):
+  - Title, slug, summary, content fields
+  - Auto-generated slug from title (with manual override)
+  - Markdown preview toggle
+  - Save Draft / Publish buttons
+  - Form validation
+  - Loading states
+- **Admin Dashboard** (`src/app/admin/page.tsx`):
+  - Integrated PostList component
+  - Loading and error states
+  - Delete confirmation dialog
+  - "New Post" button
+- **New Post Page** (`src/app/admin/new/page.tsx`):
+  - Create new posts with PostForm
+  - Redirects to dashboard on success
+- **Edit Post Page** (`src/app/admin/edit/[id]/page.tsx`):
+  - Edit existing posts
+  - Loads post data from Firestore
+  - Updates post on save
+
+### Tests
+- 96 passing tests (up from 19)
+- New tests: Post types (3), Posts service (12), Slug utility (17), PostForm (15), PostList (9), Admin pages (13)
+
+### Phase 1 Progress
+- Phase 1.1 Authentication: ✅ Complete
+- Phase 1.2 Admin Dashboard: ✅ Complete
+- Phase 1.3 Post Editor: ✅ Complete (except image upload)
+- Phase 1.4 Public Blog Homepage: ⏳ Pending
+- Phase 1.5 Post View: ⏳ Pending
 
 ---
 
