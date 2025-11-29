@@ -4,10 +4,49 @@ All notable development progress for this project will be documented in this fil
 
 ## [Unreleased]
 
-### Planned Next
-- Add image upload to Firebase Storage
+### Planned Next (Phase 2)
 - Add proper markdown rendering library (react-markdown)
 - SEO meta tags for blog posts
+- Rich text editor enhancements
+- Tags/categories system
+
+---
+
+## 2025-11-29 - Session 6: Image Upload
+
+### Added
+- **Image Storage Service** (`src/lib/images.ts`):
+  - `uploadImage()` - Upload file to Firebase Storage with unique filename
+  - `deleteImage()` - Delete image by URL
+  - `getImageUrl()` - Get download URL for storage path
+  - Unique filename generation to prevent collisions
+  - URL extraction for Firebase Storage paths
+- **ImageUploader Component** (`src/components/admin/ImageUploader.tsx`):
+  - Drag-and-drop file upload
+  - Click to upload with file picker
+  - Image preview with remove button
+  - Loading state during upload
+  - Error handling and display
+  - Mobile-friendly with 44px touch targets
+- **PostForm Integration**:
+  - Cover image field added before Summary
+  - Image state management
+  - Pass cover image URL on form submit
+
+### Tests
+- 144 passing tests (up from 118)
+- New tests: Image storage service (10), ImageUploader component (12), PostForm cover image (4)
+
+### Phase 1 Progress
+**Phase 1 Core MVP: 100% Complete!**
+
+All features implemented:
+- ✅ Authentication with Google Sign-In
+- ✅ Admin Dashboard with CRUD operations
+- ✅ Post Editor with markdown preview
+- ✅ Cover image upload to Firebase Storage
+- ✅ Public Blog Homepage
+- ✅ Individual Post View
 
 ---
 

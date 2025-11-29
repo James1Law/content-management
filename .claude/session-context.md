@@ -4,17 +4,15 @@ This file tracks current development context and decisions made across sessions.
 
 ## Current Phase
 
-**Phase 1: Core MVP** - In Progress (~90% complete)
+**Phase 1: Core MVP** - Complete! (100%)
 
 ### Completed
 - [x] Phase 1.1 Authentication (100%)
 - [x] Phase 1.2 Admin Dashboard (100%)
-- [x] Phase 1.3 Post Editor (90% - missing image upload)
+- [x] Phase 1.3 Post Editor (100%)
 - [x] Phase 1.4 Public Blog Homepage (100%)
 - [x] Phase 1.5 Post View (100%)
-
-### Remaining
-- [ ] Image upload to Firebase Storage
+- [x] Image upload to Firebase Storage (100%)
 
 ## What's Built
 
@@ -35,11 +33,19 @@ This file tracks current development context and decisions made across sessions.
 - Slug generation utility (`src/lib/slug.ts`)
 - Markdown preview toggle
 - Auto-save slug from title
+- Cover image upload with drag-and-drop
+
+### Image Upload
+- Image storage service (`src/lib/images.ts`)
+- ImageUploader component (`src/components/admin/ImageUploader.tsx`)
+- Upload, delete, and get URL functions for Firebase Storage
+- Mobile-friendly with drag-and-drop support
 
 ### Data Layer
 - Post types and interfaces (`src/lib/types.ts`)
 - Firestore posts service (`src/lib/posts.ts`)
 - Slug utilities (`src/lib/slug.ts`)
+- Image storage utilities (`src/lib/images.ts`)
 
 ### Public Blog
 - PostCard component (`src/components/blog/PostCard.tsx`)
@@ -48,8 +54,8 @@ This file tracks current development context and decisions made across sessions.
 - Basic markdown rendering
 
 ### Test Coverage
-- 118 passing tests
-- Tests for: AuthProvider, Login page, Admin layout, Post types, Posts service, Slug utility, PostForm, PostList, Admin pages, PostCard, Homepage, Blog post page
+- 144 passing tests
+- Tests for: AuthProvider, Login page, Admin layout, Post types, Posts service, Slug utility, Image storage, PostForm, PostList, ImageUploader, Admin pages, PostCard, Homepage, Blog post page
 
 ### Project Structure
 ```
@@ -72,14 +78,16 @@ src/
 │   └── globals.css
 ├── components/
 │   ├── admin/
-│   │   ├── PostForm.tsx  # Create/edit form
-│   │   └── PostList.tsx  # Post list with actions
+│   │   ├── ImageUploader.tsx  # Cover image upload
+│   │   ├── PostForm.tsx       # Create/edit form
+│   │   └── PostList.tsx       # Post list with actions
 │   ├── blog/
 │   │   └── PostCard.tsx  # Post preview card
 │   └── providers/
 │       └── AuthProvider.tsx
 ├── lib/
 │   ├── firebase.ts       # Firebase client SDK config
+│   ├── images.ts         # Firebase Storage operations
 │   ├── posts.ts          # Firestore posts CRUD
 │   ├── slug.ts           # Slug generation utilities
 │   └── types.ts          # Post interfaces
@@ -107,8 +115,9 @@ Authorized user: `officerjlaw@gmail.com`
 
 Run `/my-memory` to get caught up on project state.
 
-### Suggested Next Tasks
-1. Add image upload to Firebase Storage (cover image for posts)
-2. Add proper markdown rendering library (react-markdown)
-3. Add SEO meta tags for blog posts
-4. Start Phase 2 enhancements (rich text editor, tags)
+### Suggested Next Tasks (Phase 2)
+1. Add proper markdown rendering library (react-markdown)
+2. Add SEO meta tags for blog posts
+3. Rich text editor enhancements
+4. Tags/categories system
+5. Search functionality

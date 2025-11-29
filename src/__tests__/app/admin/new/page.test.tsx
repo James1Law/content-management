@@ -16,6 +16,30 @@ jest.mock('next/navigation', () => ({
   })),
 }));
 
+// Mock ImageUploader to avoid Firebase import
+jest.mock('@/components/admin/ImageUploader', () => {
+  return function MockImageUploader({
+    label,
+    onUpload,
+  }: {
+    label?: string;
+    onUpload: (url: string) => void;
+  }) {
+    return (
+      <div data-testid="image-uploader">
+        {label && <span>{label}</span>}
+        <button
+          type="button"
+          onClick={() => onUpload('https://example.com/test.jpg')}
+          data-testid="mock-upload-btn"
+        >
+          Upload
+        </button>
+      </div>
+    );
+  };
+});
+
 const mockCreatePost = createPost as jest.Mock;
 
 describe('NewPostPage', () => {

@@ -10,6 +10,40 @@ jest.mock('next/navigation', () => ({
   })),
 }));
 
+// Mock the ImageUploader component
+jest.mock('@/components/admin/ImageUploader', () => {
+  return function MockImageUploader({
+    imageUrl,
+    onUpload,
+    onRemove,
+    label,
+  }: {
+    imageUrl?: string | null;
+    onUpload: (url: string) => void;
+    onRemove?: () => void;
+    label?: string;
+  }) {
+    return (
+      <div data-testid="image-uploader">
+        {label && <span>{label}</span>}
+        {imageUrl && <span data-testid="current-image">{imageUrl}</span>}
+        <button
+          type="button"
+          onClick={() => onUpload('https://example.com/uploaded.jpg')}
+          data-testid="mock-upload-btn"
+        >
+          Upload Image
+        </button>
+        {onRemove && (
+          <button type="button" onClick={onRemove} data-testid="mock-remove-btn">
+            Remove Image
+          </button>
+        )}
+      </div>
+    );
+  };
+});
+
 describe('PostForm', () => {
   const mockOnSubmit = jest.fn();
 
@@ -236,6 +270,91 @@ describe('PostForm', () => {
       const buttons = screen.getAllByRole('button');
       // Just verify buttons exist - CSS classes handle sizing
       expect(buttons.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('Cover image', () => {
+    it('should render image uploader with label', () => {
+      render(<PostForm onSubmit={mockOnSubmit} />);
+
+      expect(screen.getByTestId('image-uploader')).toBeInTheDocument();
+      expect(screen.getByText('Cover Image')).toBeInTheDocument();
+    });
+
+    it('should update cover image when uploaded', async () => {
+      const user = userEvent.setup();
+      render(<PostForm onSubmit={mockOnSubmit} />);
+
+      await user.type(screen.getByLabelText(/title/i), 'Test Post');
+
+      // Click mock upload button
+      await user.click(screen.getByTestId('mock-upload-btn'));
+
+      // Submit the form
+      await user.click(screen.getByRole('button', { name: /save draft/i }));
+
+      await waitFor(() => {
+        expect(mockOnSubmit).toHaveBeenCalledWith(
+          expect.objectContaining({
+            coverImage: 'https://example.com/uploaded.jpg',
+          })
+        );
+      });
+    });
+
+    it('should show existing cover image when editing', () => {
+      const postWithImage: Post = {
+        id: 'post1',
+        title: 'Post with Image',
+        slug: 'post-with-image',
+        summary: 'Summary',
+        content: 'Content',
+        coverImage: 'https://example.com/existing.jpg',
+        images: [],
+        status: 'published',
+        publishedAt: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+
+      render(<PostForm post={postWithImage} onSubmit={mockOnSubmit} />);
+
+      expect(screen.getByTestId('current-image')).toHaveTextContent(
+        'https://example.com/existing.jpg'
+      );
+    });
+
+    it('should clear cover image when removed', async () => {
+      const user = userEvent.setup();
+      const postWithImage: Post = {
+        id: 'post1',
+        title: 'Post with Image',
+        slug: 'post-with-image',
+        summary: 'Summary',
+        content: 'Content',
+        coverImage: 'https://example.com/existing.jpg',
+        images: [],
+        status: 'published',
+        publishedAt: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+
+      render(<PostForm post={postWithImage} onSubmit={mockOnSubmit} />);
+
+      // Click mock remove button
+      await user.click(screen.getByTestId('mock-remove-btn'));
+
+      // Submit the form
+      await user.click(screen.getByRole('button', { name: /save draft/i }));
+
+      await waitFor(() => {
+        expect(mockOnSubmit).toHaveBeenCalledWith(
+          expect.objectContaining({
+            coverImage: null,
+          })
+        );
+      });
     });
   });
 });

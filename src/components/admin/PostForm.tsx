@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Post, CreatePostData } from '@/lib/types';
 import { generateSlug, isValidSlug } from '@/lib/slug';
+import ImageUploader from './ImageUploader';
 
 interface PostFormProps {
   post?: Post;
@@ -21,6 +22,7 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
   const [slug, setSlug] = useState(post?.slug ?? '');
   const [summary, setSummary] = useState(post?.summary ?? '');
   const [content, setContent] = useState(post?.content ?? '');
+  const [coverImage, setCoverImage] = useState<string | null>(post?.coverImage ?? null);
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(!!post);
   const [showPreview, setShowPreview] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -70,7 +72,7 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
         slug: slug.trim(),
         summary: summary.trim(),
         content,
-        coverImage: post?.coverImage ?? null,
+        coverImage,
         images: post?.images ?? [],
         status,
       });
@@ -128,6 +130,14 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
           <p className="mt-1 text-sm text-red-600">{errors.slug}</p>
         )}
       </div>
+
+      {/* Cover Image */}
+      <ImageUploader
+        imageUrl={coverImage}
+        onUpload={(url) => setCoverImage(url)}
+        onRemove={() => setCoverImage(null)}
+        label="Cover Image"
+      />
 
       {/* Summary */}
       <div>
