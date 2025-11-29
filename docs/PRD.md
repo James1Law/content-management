@@ -27,60 +27,60 @@ A personal content management system for publishing blog posts to a public-facin
 
 ## Features
 
-### Phase 1: Core MVP
+### Phase 1: Core MVP ✅ COMPLETE
 
-#### 1.1 Authentication
+#### 1.1 Authentication ✅
 - [x] Firebase Auth integration
 - [x] Login page at `/login`
 - [x] Protected admin routes (redirect to login if not authenticated)
 - [x] Single authorized user restriction (check email/UID)
 - [x] Logout functionality
 
-#### 1.2 Admin Dashboard (`/admin`)
-- [ ] List all posts (drafts and published)
-- [ ] Show post status badges (draft/published)
-- [ ] Show last modified date
-- [ ] Quick actions: edit, delete, publish/unpublish
-- [ ] "New Post" button
-- [ ] Mobile-responsive layout
+#### 1.2 Admin Dashboard (`/admin`) ✅
+- [x] List all posts (drafts and published)
+- [x] Show post status badges (draft/published)
+- [x] Show last modified date
+- [x] Quick actions: edit, delete, publish/unpublish
+- [x] "New Post" button
+- [x] Mobile-responsive layout
 
-#### 1.3 Post Editor (`/admin/new`, `/admin/edit/[id]`)
-- [ ] Title input
-- [ ] Slug input (auto-generate from title, allow override)
-- [ ] Summary/excerpt input (for previews)
-- [ ] Cover image upload
-  - [ ] Drag and drop on desktop
-  - [ ] File picker on mobile (camera roll support)
-  - [ ] Image preview
-  - [ ] Upload to Firebase Storage
-- [ ] Content editor (Markdown)
-  - [ ] Mobile-friendly text input
-  - [ ] Preview toggle
-  - [ ] Basic formatting toolbar (optional)
-- [ ] Additional images within content
-- [ ] Save as draft
-- [ ] Publish button
-- [ ] Auto-save drafts (every 30 seconds or on blur)
-- [ ] Large touch targets for mobile (min 44px)
+#### 1.3 Post Editor (`/admin/new`, `/admin/edit/[id]`) ✅
+- [x] Title input
+- [x] Slug input (auto-generate from title, allow override)
+- [x] Summary/excerpt input (for previews)
+- [x] Cover image upload
+  - [x] Drag and drop on desktop
+  - [x] File picker on mobile (camera roll support)
+  - [x] Image preview
+  - [x] Upload to Firebase Storage
+- [x] Content editor (Markdown)
+  - [x] Mobile-friendly text input
+  - [x] Preview toggle
+  - [ ] Basic formatting toolbar (optional - deferred to Phase 2)
+- [ ] Additional images within content (deferred to Phase 2)
+- [x] Save as draft
+- [x] Publish button
+- [ ] Auto-save drafts (every 30 seconds or on blur) (deferred to Phase 2)
+- [x] Large touch targets for mobile (min 44px)
 
-#### 1.4 Public Blog Homepage (`/`)
-- [ ] List published posts (newest first)
-- [ ] Post cards showing:
-  - [ ] Cover image (optimized)
-  - [ ] Title
-  - [ ] Summary
-  - [ ] Published date
-- [ ] Responsive grid layout
-- [ ] Pagination or infinite scroll
+#### 1.4 Public Blog Homepage (`/`) ✅
+- [x] List published posts (newest first)
+- [x] Post cards showing:
+  - [x] Cover image (optimized)
+  - [x] Title
+  - [x] Summary
+  - [x] Published date
+- [x] Responsive grid layout
+- [ ] Pagination or infinite scroll (deferred to Phase 2)
 
-#### 1.5 Post View (`/blog/[slug]`)
-- [ ] Full post content rendered from Markdown
-- [ ] Cover image (full width, optimized)
-- [ ] Title and published date
-- [ ] Responsive typography
-- [ ] Image optimization via Next.js Image
-- [ ] Social sharing meta tags (og:image, etc.)
-- [ ] Back to home link
+#### 1.5 Post View (`/blog/[slug]`) ✅
+- [x] Full post content rendered from Markdown
+- [x] Cover image (full width, optimized)
+- [x] Title and published date
+- [x] Responsive typography
+- [x] Image optimization via Next.js Image
+- [ ] Social sharing meta tags (og:image, etc.) (deferred to Phase 2)
+- [x] Back to home link
 
 ### Phase 2: Enhancements
 
@@ -110,6 +110,13 @@ A personal content management system for publishing blog posts to a public-facin
 - [ ] Sitemap generation
 - [ ] Structured data (JSON-LD)
 - [ ] Canonical URLs
+- [ ] Social sharing meta tags (og:image, etc.)
+
+#### 2.7 Additional Enhancements (from Phase 1 deferral)
+- [ ] Basic formatting toolbar for editor
+- [ ] Additional images within content
+- [ ] Auto-save drafts
+- [ ] Pagination or infinite scroll
 
 ### Phase 3: Nice-to-Have
 
@@ -195,3 +202,13 @@ A personal content management system for publishing blog posts to a public-facin
 1. Can publish a post from phone in under 2 minutes
 2. Blog loads in under 2 seconds on 3G
 3. Zero friction daily/weekly posting workflow
+
+## Development Progress
+
+### Test Coverage
+- 144 passing tests
+- TDD approach throughout
+
+### Deployed
+- Production: Vercel (auto-deploy from main branch)
+- Firebase project: `content-management-ae0a4`
