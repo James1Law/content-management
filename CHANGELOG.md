@@ -6,7 +6,40 @@ All notable development progress for this project will be documented in this fil
 
 ### Planned Next
 - Add image upload to Firebase Storage
-- Implement public blog homepage and post view
+- Add proper markdown rendering library (react-markdown)
+- SEO meta tags for blog posts
+
+---
+
+## 2025-11-29 - Session 5: Public Blog
+
+### Added
+- **PostCard Component** (`src/components/blog/PostCard.tsx`):
+  - Displays post preview with cover image, title, summary, date
+  - Links to individual post page
+  - Responsive image handling with Next.js Image
+- **Public Homepage** (`src/app/page.tsx`):
+  - Displays grid of published posts
+  - Loading, empty, and error states
+  - Responsive 2-column grid on desktop
+- **Blog Post Page** (`src/app/blog/[slug]/page.tsx`):
+  - Full post view with cover image
+  - Basic markdown rendering
+  - Back navigation
+  - Handles 404 for non-existent/draft posts
+
+### Tests
+- 118 passing tests (up from 96)
+- New tests: PostCard (7), Homepage (7), Blog post page (9)
+
+### Phase 1 Progress
+- Phase 1.1 Authentication: ✅ Complete
+- Phase 1.2 Admin Dashboard: ✅ Complete
+- Phase 1.3 Post Editor: ✅ Complete (except image upload)
+- Phase 1.4 Public Blog Homepage: ✅ Complete
+- Phase 1.5 Post View: ✅ Complete
+
+**Phase 1 Core MVP: ~90% Complete** (missing image upload)
 
 ---
 

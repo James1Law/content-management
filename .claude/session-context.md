@@ -4,16 +4,17 @@ This file tracks current development context and decisions made across sessions.
 
 ## Current Phase
 
-**Phase 1: Core MVP** - In Progress (~60% complete)
+**Phase 1: Core MVP** - In Progress (~90% complete)
 
 ### Completed
 - [x] Phase 1.1 Authentication (100%)
 - [x] Phase 1.2 Admin Dashboard (100%)
 - [x] Phase 1.3 Post Editor (90% - missing image upload)
+- [x] Phase 1.4 Public Blog Homepage (100%)
+- [x] Phase 1.5 Post View (100%)
 
-### In Progress
-- [ ] Phase 1.4 Public Blog Homepage
-- [ ] Phase 1.5 Post View
+### Remaining
+- [ ] Image upload to Firebase Storage
 
 ## What's Built
 
@@ -40,9 +41,15 @@ This file tracks current development context and decisions made across sessions.
 - Firestore posts service (`src/lib/posts.ts`)
 - Slug utilities (`src/lib/slug.ts`)
 
+### Public Blog
+- PostCard component (`src/components/blog/PostCard.tsx`)
+- Public homepage with post grid (`src/app/page.tsx`)
+- Blog post page (`src/app/blog/[slug]/page.tsx`)
+- Basic markdown rendering
+
 ### Test Coverage
-- 96 passing tests
-- Tests for: AuthProvider, Login page, Admin layout, Post types, Posts service, Slug utility, PostForm, PostList, Admin pages
+- 118 passing tests
+- Tests for: AuthProvider, Login page, Admin layout, Post types, Posts service, Slug utility, PostForm, PostList, Admin pages, PostCard, Homepage, Blog post page
 
 ### Project Structure
 ```
@@ -55,15 +62,20 @@ src/
 │   │   │   └── page.tsx  # New post
 │   │   ├── layout.tsx    # Protected layout with nav
 │   │   └── page.tsx      # Dashboard with PostList
+│   ├── blog/
+│   │   └── [slug]/
+│   │       └── page.tsx  # Individual post view
 │   ├── login/
 │   │   └── page.tsx      # Login form
 │   ├── layout.tsx        # Root layout with AuthProvider
-│   ├── page.tsx          # Public homepage (placeholder)
+│   ├── page.tsx          # Public homepage with posts
 │   └── globals.css
 ├── components/
 │   ├── admin/
 │   │   ├── PostForm.tsx  # Create/edit form
 │   │   └── PostList.tsx  # Post list with actions
+│   ├── blog/
+│   │   └── PostCard.tsx  # Post preview card
 │   └── providers/
 │       └── AuthProvider.tsx
 ├── lib/
@@ -97,6 +109,6 @@ Run `/my-memory` to get caught up on project state.
 
 ### Suggested Next Tasks
 1. Add image upload to Firebase Storage (cover image for posts)
-2. Build public blog homepage with post list
-3. Build individual post view page (`/blog/[slug]`)
-4. Add proper markdown rendering library
+2. Add proper markdown rendering library (react-markdown)
+3. Add SEO meta tags for blog posts
+4. Start Phase 2 enhancements (rich text editor, tags)
