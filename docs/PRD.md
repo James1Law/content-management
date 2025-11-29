@@ -30,11 +30,11 @@ A personal content management system for publishing blog posts to a public-facin
 ### Phase 1: Core MVP
 
 #### 1.1 Authentication
-- [ ] Firebase Auth integration
-- [ ] Login page at `/login`
-- [ ] Protected admin routes (redirect to login if not authenticated)
-- [ ] Single authorized user restriction (check email/UID)
-- [ ] Logout functionality
+- [x] Firebase Auth integration
+- [x] Login page at `/login`
+- [x] Protected admin routes (redirect to login if not authenticated)
+- [x] Single authorized user restriction (check email/UID)
+- [x] Logout functionality
 
 #### 1.2 Admin Dashboard (`/admin`)
 - [ ] List all posts (drafts and published)
