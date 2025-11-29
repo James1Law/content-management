@@ -5,37 +5,32 @@ All notable development progress for this project will be documented in this fil
 ## [Unreleased]
 
 ### Planned Next
-- Implement Firebase Auth with login page
-- Create AuthProvider context
-- Build admin dashboard (list posts)
-- Create post editor form
+- Build admin dashboard with post list (from Firestore)
+- Create post editor form with image upload
+- Implement public blog homepage and post view
 
 ---
 
-## 2025-11-29 - Session 3: Project Initialization
+## 2025-11-29 - Session 3: Project Initialization + Auth
 
 ### Added
+- **Authentication System (Phase 1.1 complete)**:
+  - `AuthProvider` context with Firebase Auth integration
+  - Login page (`/login`) with email/password and Google sign-in
+  - Protected admin routes with authorization check
+  - Single authorized user restriction via `NEXT_PUBLIC_AUTHORIZED_USER_EMAIL`
+- **Admin Layout**:
+  - Protected `/admin` routes (redirects to login if unauthorized)
+  - Admin header with navigation (Dashboard, New Post)
+  - Sign out functionality
+- **19 passing tests** (TDD approach)
+
+### Project Setup
 - Initialized Next.js 14 with App Router, TypeScript, Tailwind CSS, ESLint
 - Set up Jest + React Testing Library for TDD
 - Configured Firebase SDK (`src/lib/firebase.ts`)
-- Created project structure:
-  - `src/app/` - App Router pages
-  - `src/components/` - admin/, blog/, ui/, providers/
-  - `src/lib/` - utilities and Firebase
-  - `src/__tests__/` - test files mirroring src structure
+- Created project structure with app, components, lib, and tests directories
 - Created `.env.local` with Firebase config
-- First passing test (`page.test.tsx`)
-
-### Configuration
-- `next.config.mjs` - Firebase Storage image domains configured
-- `jest.config.mjs` - Jest with next/jest integration
-- `tailwind.config.ts` - Tailwind with CSS variables
-
-### Working Commands
-- `npm run dev` - Start dev server
-- `npm run build` - Production build (verified working)
-- `npm test` - Run Jest tests (1 passing)
-- `npm run lint` - ESLint
 
 ---
 
