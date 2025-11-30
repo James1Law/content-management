@@ -52,7 +52,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps): JSX.Element
 
   if (loading) {
     return (
-      <main className="min-h-screen max-w-3xl mx-auto px-4 py-12">
+      <main className="min-h-screen max-w-3xl mx-auto px-4 py-12 bg-white">
         <div className="flex justify-center py-12">
           <p className="text-gray-500">Loading...</p>
         </div>
@@ -62,7 +62,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps): JSX.Element
 
   if (error) {
     return (
-      <main className="min-h-screen max-w-3xl mx-auto px-4 py-12">
+      <main className="min-h-screen max-w-3xl mx-auto px-4 py-12 bg-white">
         <div className="text-center py-12">
           <p className="text-red-600 mb-4">{error}</p>
           <Link href="/" className="text-blue-600 hover:text-blue-800">
@@ -75,7 +75,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps): JSX.Element
 
   if (notFound || !post) {
     return (
-      <main className="min-h-screen max-w-3xl mx-auto px-4 py-12">
+      <main className="min-h-screen max-w-3xl mx-auto px-4 py-12 bg-white">
         <div className="text-center py-12">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Post Not Found</h1>
           <p className="text-gray-600 mb-6">
@@ -90,7 +90,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps): JSX.Element
   }
 
   return (
-    <main className="min-h-screen max-w-3xl mx-auto px-4 py-12">
+    <main className="min-h-screen max-w-3xl mx-auto px-4 py-12 bg-white">
       {/* Back link */}
       <Link
         href="/"

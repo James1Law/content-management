@@ -27,9 +27,9 @@ export default function Home(): JSX.Element {
   }, []);
 
   return (
-    <main className="min-h-screen max-w-4xl mx-auto px-4 py-12">
+    <main className="min-h-screen max-w-4xl mx-auto px-4 py-12 bg-white">
       <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-2">Blog</h1>
+        <h1 className="text-4xl font-bold mb-2 text-gray-900">Blog</h1>
         <p className="text-gray-600">Thoughts, ideas, and stories</p>
       </header>
 

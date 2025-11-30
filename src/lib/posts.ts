@@ -148,7 +148,17 @@ export async function updatePost(
     updateData.publishedAt = serverTimestamp();
   }
 
-  await updateDoc(docRef, updateData);
+  // Add timeout to detect hanging Firebase operations (usually security rules issue)
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    setTimeout(() => {
+      reject(new Error('Firebase operation timed out. This usually means Firestore security rules are blocking the write. Please check your Firebase Console security rules.'));
+    }, 10000); // 10 second timeout
+  });
+
+  await Promise.race([
+    updateDoc(docRef, updateData),
+    timeoutPromise,
+  ]);
 
   // Fetch and return the updated document
   return getPostById(id);

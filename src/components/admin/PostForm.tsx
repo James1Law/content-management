@@ -83,7 +83,12 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
   }
 
   const isEditing = !!post;
-  const publishButtonText = isEditing ? 'Update' : 'Publish';
+  const isPublished = post?.status === 'published';
+  // Button text logic:
+  // - New post: "Publish"
+  // - Editing published post: "Update"
+  // - Editing draft: "Publish"
+  const publishButtonText = isEditing && isPublished ? 'Update' : 'Publish';
 
   return (
     <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
