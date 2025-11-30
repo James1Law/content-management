@@ -49,12 +49,13 @@ This file tracks current development context and decisions made across sessions.
 
 ### Public Blog
 - PostCard component (`src/components/blog/PostCard.tsx`)
+- PostContent component (`src/components/blog/PostContent.tsx`) - markdown rendering
 - Public homepage with post grid (`src/app/page.tsx`)
 - Blog post page (`src/app/blog/[slug]/page.tsx`)
-- Basic markdown rendering
+- Full markdown rendering with react-markdown and remark-gfm
 
 ### Test Coverage
-- 144 passing tests
+- 163 passing tests
 - Tests for: AuthProvider, Login page, Admin layout, Post types, Posts service, Slug utility, Image storage, PostForm, PostList, ImageUploader, Admin pages, PostCard, Homepage, Blog post page
 
 ### Project Structure
@@ -107,17 +108,42 @@ src/
 Firebase project: `content-management-ae0a4`
 Authorized user: `officerjlaw@gmail.com`
 
+## Firebase Configuration
+
+### Firestore Security Rules
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /posts/{postId} {
+      allow read: if true;
+      allow create, update, delete: if request.auth != null
+                                     && request.auth.token.email == 'officerjlaw@gmail.com';
+    }
+  }
+}
+```
+
+### Required Indexes
+- Collection: `posts` | Fields: `status` (asc), `publishedAt` (desc)
+
+### Configuration Files
+- `firebase.json` - Project config
+- `firestore.rules` - Security rules
+- `firestore.indexes.json` - Index definitions
+- `storage.rules` - Storage security rules
+
 ## Blockers / Open Questions
 
-- None currently
+None currently - all Phase 1 features working!
 
 ## Next Session Start Point
 
 Run `/my-memory` to get caught up on project state.
 
 ### Suggested Next Tasks (Phase 2)
-1. Add proper markdown rendering library (react-markdown)
-2. Add SEO meta tags for blog posts
-3. Rich text editor enhancements
-4. Tags/categories system
-5. Search functionality
+1. Add SEO meta tags for blog posts (og:image, og:title, og:description)
+2. Rich text editor enhancements (formatting toolbar)
+3. Tags/categories system
+4. Auto-save drafts
+5. Pagination/infinite scroll on homepage

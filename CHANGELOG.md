@@ -5,10 +5,69 @@ All notable development progress for this project will be documented in this fil
 ## [Unreleased]
 
 ### Planned Next (Phase 2)
-- Add proper markdown rendering library (react-markdown)
 - SEO meta tags for blog posts
 - Rich text editor enhancements
 - Tags/categories system
+
+---
+
+## 2025-11-30 - Session 8: Firebase Configuration & Bug Fixes
+
+### Fixed
+- **Firebase publish hanging issue** - Posts were not saving due to missing Firestore database and security rules
+  - Created Firestore database in Firebase Console
+  - Added proper security rules allowing public reads and authenticated admin writes
+  - Created composite index for `status` + `publishedAt` query
+- **Public blog not loading posts** - Security rules were blocking unauthenticated list queries
+  - Updated rules to `allow read: if true` for posts collection
+  - App code still filters to only show published posts to public users
+
+### Added
+- **Firebase configuration files**:
+  - `firebase.json` - Firebase project configuration
+  - `firestore.rules` - Firestore security rules
+  - `firestore.indexes.json` - Composite index definitions
+  - `storage.rules` - Firebase Storage security rules
+- **Timeout error handling** - Added 10-second timeout to `createPost()` to surface Firebase permission errors instead of hanging indefinitely
+
+### Infrastructure
+- Installed Firebase CLI globally (`firebase-tools`)
+- Configured Firestore security rules:
+  - Anyone can read posts (app filters published only)
+  - Only `officerjlaw@gmail.com` can create, update, delete
+- Created composite index: `posts` collection on `status` (asc) + `publishedAt` (desc)
+
+---
+
+## 2025-11-29 - Session 7: Markdown Rendering Enhancement
+
+### Added
+- **Proper Markdown Rendering** with `react-markdown` and `remark-gfm`:
+  - Full GitHub Flavored Markdown support (tables, task lists, strikethrough)
+  - Code blocks with syntax highlighting ready
+  - Headings, bold, italic, links, lists, blockquotes
+  - External links open in new tab automatically
+- **PostContent Component** (`src/components/blog/PostContent.tsx`):
+  - Reusable markdown renderer using react-markdown
+  - Prose styling for beautiful typography
+  - Used in both blog post view and admin preview
+- **Form Input Visibility Fix**:
+  - Added explicit `text-gray-900` color to all form inputs
+  - Placeholder text now clearly distinguishable from user input
+
+### Changed
+- Blog post page now uses `PostContent` component instead of basic inline renderer
+- PostForm preview now uses `PostContent` for consistent rendering
+- Removed redundant `MarkdownPreview` and `MarkdownContent` inline functions
+
+### Tests
+- 163 passing tests (up from 144)
+- New tests: PostContent component (19 tests covering all markdown features)
+- Added Jest mocks for react-markdown and remark-gfm ESM modules
+
+### Known Issues
+- Save Draft / Publish buttons hanging locally - likely Firebase auth/connection issue
+- Need to verify user is logged in before creating posts
 
 ---
 

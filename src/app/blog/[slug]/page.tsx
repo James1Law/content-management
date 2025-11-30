@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Post } from '@/lib/types';
 import { getPostBySlug } from '@/lib/posts';
+import PostContent from '@/components/blog/PostContent';
 
 interface BlogPostPageProps {
   params: { slug: string };
@@ -19,55 +20,6 @@ function formatDate(date: Date): string {
     month: 'long',
     day: 'numeric',
   });
-}
-
-/**
- * Simple markdown renderer
- * Converts basic markdown to HTML elements
- */
-function MarkdownContent({ content }: { content: string }): JSX.Element {
-  const lines = content.split('\n');
-
-  return (
-    <div className="prose prose-lg max-w-none">
-      {lines.map((line, index) => {
-        // Headings
-        if (line.startsWith('### ')) {
-          return (
-            <h3 key={index} className="text-xl font-bold mt-6 mb-3">
-              {line.slice(4)}
-            </h3>
-          );
-        }
-        if (line.startsWith('## ')) {
-          return (
-            <h2 key={index} className="text-2xl font-bold mt-8 mb-4">
-              {line.slice(3)}
-            </h2>
-          );
-        }
-        if (line.startsWith('# ')) {
-          return (
-            <h1 key={index} className="text-3xl font-bold mt-8 mb-4">
-              {line.slice(2)}
-            </h1>
-          );
-        }
-
-        // Empty lines
-        if (line.trim() === '') {
-          return <br key={index} />;
-        }
-
-        // Regular paragraphs
-        return (
-          <p key={index} className="mb-4 leading-relaxed">
-            {line}
-          </p>
-        );
-      })}
-    </div>
-  );
 }
 
 export default function BlogPostPage({ params }: BlogPostPageProps): JSX.Element {
@@ -171,7 +123,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps): JSX.Element
         )}
 
         {/* Content */}
-        <MarkdownContent content={post.content} />
+        <PostContent content={post.content} />
       </article>
 
       {/* Footer */}

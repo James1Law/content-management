@@ -1,0 +1,17 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Posts collection
+    match /posts/{postId} {
+      // Anyone can read any post
+      // Note: The app code filters to only show published posts to the public
+      // Drafts are technically readable but not exposed in the UI
+      allow read: if true;
+
+      // Only authenticated admin can create, update, delete
+      allow create, update, delete: if request.auth != null
+                                     && request.auth.token.email == 'officerjlaw@gmail.com';
+    }
+  }
+}

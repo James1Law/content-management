@@ -206,7 +206,7 @@ A personal content management system for publishing blog posts to a public-facin
 ## Development Progress
 
 ### Test Coverage
-- 144 passing tests
+- 163 passing tests
 - TDD approach throughout
 
 ### Deployed

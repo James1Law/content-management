@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Post, CreatePostData } from '@/lib/types';
 import { generateSlug, isValidSlug } from '@/lib/slug';
 import ImageUploader from './ImageUploader';
+import PostContent from '@/components/blog/PostContent';
 
 interface PostFormProps {
   post?: Post;
@@ -99,7 +100,7 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full px-4 py-3 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-4 py-3 text-lg text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-400"
           placeholder="Enter post title"
         />
         {errors.title && (
@@ -122,7 +123,7 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
             id="slug"
             value={slug}
             onChange={(e) => handleSlugChange(e.target.value)}
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="flex-1 px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-400"
             placeholder="post-slug"
           />
         </div>
@@ -152,7 +153,7 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
           rows={2}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+          className="w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none placeholder:text-gray-400"
           placeholder="Brief summary for post previews"
         />
         {errors.summary && (
@@ -181,10 +182,10 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
         {showPreview ? (
           <div
             data-testid="markdown-preview"
-            className="w-full min-h-[300px] px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 prose prose-sm max-w-none"
+            className="w-full min-h-[300px] px-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
           >
             {content ? (
-              <MarkdownPreview content={content} />
+              <PostContent content={content} />
             ) : (
               <p className="text-gray-400 italic">Nothing to preview</p>
             )}
@@ -195,7 +196,7 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={12}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
+            className="w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm placeholder:text-gray-400"
             placeholder="Write your post content in Markdown..."
           />
         )}
@@ -227,50 +228,3 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
   );
 }
 
-/**
- * Simple markdown preview component
- * For now, just renders the raw text with basic formatting
- * Can be enhanced with a proper markdown parser later
- */
-function MarkdownPreview({ content }: { content: string }): JSX.Element {
-  // Basic markdown rendering - split by newlines and render
-  // This is a placeholder - we'll add proper markdown parsing later
-  const lines = content.split('\n');
-
-  return (
-    <div className="whitespace-pre-wrap">
-      {lines.map((line, index) => {
-        // Very basic heading detection
-        if (line.startsWith('# ')) {
-          return (
-            <h1 key={index} className="text-2xl font-bold mb-2">
-              {line.slice(2)}
-            </h1>
-          );
-        }
-        if (line.startsWith('## ')) {
-          return (
-            <h2 key={index} className="text-xl font-bold mb-2">
-              {line.slice(3)}
-            </h2>
-          );
-        }
-        if (line.startsWith('### ')) {
-          return (
-            <h3 key={index} className="text-lg font-bold mb-2">
-              {line.slice(4)}
-            </h3>
-          );
-        }
-        if (line.trim() === '') {
-          return <br key={index} />;
-        }
-        return (
-          <p key={index} className="mb-2">
-            {line}
-          </p>
-        );
-      })}
-    </div>
-  );
-}

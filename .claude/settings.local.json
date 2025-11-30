@@ -15,7 +15,12 @@
       "Bash(npm test:*)",
       "Bash(npx tsc:*)",
       "Bash(npm run dev:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill -9)",
+      "Bash(npx firebase:*)",
+      "Bash(firebase deploy:*)",
+      "Bash(firebase login:*)"
     ],
     "deny": [],
     "ask": []

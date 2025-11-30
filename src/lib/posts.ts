@@ -108,7 +108,17 @@ export async function createPost(data: CreatePostData): Promise<Post> {
     updatedAt: serverTimestamp(),
   };
 
-  const docRef = await addDoc(postsRef, postData);
+  // Add timeout to detect hanging Firebase operations (usually security rules issue)
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    setTimeout(() => {
+      reject(new Error('Firebase operation timed out. This usually means Firestore security rules are blocking the write. Please check your Firebase Console security rules.'));
+    }, 10000); // 10 second timeout
+  });
+
+  const docRef = await Promise.race([
+    addDoc(postsRef, postData),
+    timeoutPromise,
+  ]);
 
   return {
     id: docRef.id,
