@@ -162,6 +162,6 @@ describe("LoginPage", () => {
 
     render(<LoginPage />);
 
-    expect(screen.getByRole("heading", { name: /not authorized/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /access denied/i })).toBeInTheDocument();
   });
 });

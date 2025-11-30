@@ -51,19 +51,20 @@ export default function EditPostPage({ params }: EditPostPageProps): JSX.Element
 
   if (loading) {
     return (
-      <div className="flex justify-center py-12">
-        <div className="text-gray-500">Loading...</div>
+      <div className="flex flex-col items-center justify-center py-16">
+        <div className="w-10 h-10 border-2 border-neon-cyan border-t-transparent rounded-full animate-spin mb-4" />
+        <p className="text-synth-muted">Loading post...</p>
       </div>
     );
   }
 
   if (error && !post) {
     return (
-      <div className="text-center py-12">
-        <p className="text-red-600 mb-4">{error}</p>
+      <div className="text-center py-16">
+        <p className="text-neon-pink mb-6 font-orbitron">{error}</p>
         <Link
           href="/admin"
-          className="text-blue-600 hover:text-blue-800"
+          className="inline-flex items-center px-6 py-3 bg-deep-purple border border-neon-cyan text-neon-cyan rounded-lg hover:shadow-neon-cyan-sm transition-all"
         >
           ← Back to Dashboard
         </Link>
@@ -74,17 +75,18 @@ export default function EditPostPage({ params }: EditPostPageProps): JSX.Element
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-bold">Edit Post</h1>
+        <h1 className="text-2xl font-orbitron font-bold text-synth-text">Edit Post</h1>
         <Link
           href="/admin"
-          className="text-gray-600 hover:text-gray-800 min-h-[44px] flex items-center"
+          className="text-synth-muted hover:text-neon-cyan min-h-[44px] flex items-center transition-colors group"
         >
-          ← Back
+          <span className="transform group-hover:-translate-x-1 transition-transform">←</span>
+          <span className="ml-2">Back</span>
         </Link>
       </div>
 
       {error && (
-        <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-6">
+        <div className="bg-deep-purple border border-neon-pink/50 text-neon-pink p-4 rounded-lg mb-6 shadow-neon-pink-sm">
           {error}
         </div>
       )}

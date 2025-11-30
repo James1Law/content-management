@@ -3,8 +3,8 @@ import "./globals.css";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "A personal blog",
+  title: "Blog | Synthwave",
+  description: "A retro-futuristic personal blog",
 };
 
 export default function RootLayout({
@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased bg-void text-synth-text font-space min-h-screen">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

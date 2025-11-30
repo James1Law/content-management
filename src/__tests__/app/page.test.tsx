@@ -108,7 +108,7 @@ describe('Home', () => {
 
     render(<Home />);
 
-    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+    expect(screen.getByText(/loading posts/i)).toBeInTheDocument();
   });
 
   it('should show empty state when no posts', async () => {
@@ -117,7 +117,7 @@ describe('Home', () => {
     render(<Home />);
 
     await waitFor(() => {
-      expect(screen.getByText(/no posts yet/i)).toBeInTheDocument();
+      expect(screen.getByText(/no transmissions yet/i)).toBeInTheDocument();
     });
   });
 

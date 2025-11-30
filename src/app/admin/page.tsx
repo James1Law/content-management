@@ -44,23 +44,26 @@ export default function AdminDashboard(): JSX.Element {
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">Posts</h1>
+        <h1 className="text-2xl font-orbitron font-bold text-synth-text">
+          Posts
+        </h1>
         <Link
           href="/admin/new"
-          className="inline-flex items-center justify-center min-h-[44px] px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center justify-center min-h-[44px] px-6 py-2 bg-neon-pink text-white font-medium rounded-lg hover:shadow-neon-pink transition-all"
         >
-          New Post
+          + New Post
         </Link>
       </div>
 
       {loading && (
-        <div className="flex justify-center py-12">
-          <div className="text-gray-500">Loading posts...</div>
+        <div className="flex flex-col items-center justify-center py-16">
+          <div className="w-10 h-10 border-2 border-neon-cyan border-t-transparent rounded-full animate-spin mb-4" />
+          <p className="text-synth-muted">Loading posts...</p>
         </div>
       )}
 
       {error && (
-        <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-4">
+        <div className="bg-deep-purple border border-neon-pink/50 text-neon-pink p-4 rounded-lg mb-4 shadow-neon-pink-sm">
           {error}
         </div>
       )}

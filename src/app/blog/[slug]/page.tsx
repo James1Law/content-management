@@ -52,9 +52,12 @@ export default function BlogPostPage({ params }: BlogPostPageProps): JSX.Element
 
   if (loading) {
     return (
-      <main className="min-h-screen max-w-3xl mx-auto px-4 py-12 bg-white">
-        <div className="flex justify-center py-12">
-          <p className="text-gray-500">Loading...</p>
+      <main className="min-h-screen bg-synth-gradient">
+        <div className="max-w-3xl mx-auto px-4 py-20">
+          <div className="flex flex-col items-center justify-center">
+            <div className="w-12 h-12 border-2 border-neon-cyan border-t-transparent rounded-full animate-spin mb-4" />
+            <p className="text-synth-muted animate-pulse">Loading transmission...</p>
+          </div>
         </div>
       </main>
     );
@@ -62,12 +65,17 @@ export default function BlogPostPage({ params }: BlogPostPageProps): JSX.Element
 
   if (error) {
     return (
-      <main className="min-h-screen max-w-3xl mx-auto px-4 py-12 bg-white">
-        <div className="text-center py-12">
-          <p className="text-red-600 mb-4">{error}</p>
-          <Link href="/" className="text-blue-600 hover:text-blue-800">
-            ← Back to Home
-          </Link>
+      <main className="min-h-screen bg-synth-gradient">
+        <div className="max-w-3xl mx-auto px-4 py-20">
+          <div className="text-center">
+            <p className="text-neon-pink mb-6 font-orbitron">{error}</p>
+            <Link
+              href="/"
+              className="inline-flex items-center text-neon-cyan hover:text-neon-pink transition-colors"
+            >
+              ← Return to Base
+            </Link>
+          </div>
         </div>
       </main>
     );
@@ -75,66 +83,85 @@ export default function BlogPostPage({ params }: BlogPostPageProps): JSX.Element
 
   if (notFound || !post) {
     return (
-      <main className="min-h-screen max-w-3xl mx-auto px-4 py-12 bg-white">
-        <div className="text-center py-12">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Post Not Found</h1>
-          <p className="text-gray-600 mb-6">
-            The post you&apos;re looking for doesn&apos;t exist or has been removed.
-          </p>
-          <Link href="/" className="text-blue-600 hover:text-blue-800">
-            ← Back to Home
-          </Link>
+      <main className="min-h-screen bg-synth-gradient grid-bg">
+        <div className="max-w-3xl mx-auto px-4 py-20">
+          <div className="text-center">
+            <div className="text-6xl mb-6">📡</div>
+            <h1 className="text-3xl font-orbitron font-bold text-synth-text mb-4">
+              Signal Lost
+            </h1>
+            <p className="text-synth-muted mb-8">
+              The transmission you&apos;re looking for doesn&apos;t exist or has been removed.
+            </p>
+            <Link
+              href="/"
+              className="inline-flex items-center px-6 py-3 bg-deep-purple border border-neon-cyan text-neon-cyan rounded-lg hover:shadow-neon-cyan-sm transition-all"
+            >
+              ← Return to Base
+            </Link>
+          </div>
         </div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen max-w-3xl mx-auto px-4 py-12 bg-white">
-      {/* Back link */}
-      <Link
-        href="/"
-        className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8"
-      >
-        ← Back
-      </Link>
-
-      <article>
-        {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
-          <time className="text-gray-500">
-            {post.publishedAt ? formatDate(post.publishedAt) : ''}
-          </time>
-        </header>
-
-        {/* Cover Image */}
-        {post.coverImage && (
-          <div className="relative aspect-[16/9] mb-8 rounded-lg overflow-hidden">
-            <Image
-              src={post.coverImage}
-              alt={post.title}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, 768px"
-            />
-          </div>
-        )}
-
-        {/* Content */}
-        <PostContent content={post.content} />
-      </article>
-
-      {/* Footer */}
-      <footer className="mt-12 pt-8 border-t">
+    <main className="min-h-screen bg-synth-gradient">
+      <div className="max-w-3xl mx-auto px-4 py-12">
+        {/* Back link */}
         <Link
           href="/"
-          className="text-blue-600 hover:text-blue-800"
+          className="inline-flex items-center text-synth-muted hover:text-neon-cyan transition-colors mb-8 group"
         >
-          ← Back to all posts
+          <span className="transform group-hover:-translate-x-1 transition-transform">←</span>
+          <span className="ml-2">Back to all posts</span>
         </Link>
-      </footer>
+
+        <article>
+          {/* Header */}
+          <header className="mb-8">
+            <h1 className="text-3xl md:text-5xl font-orbitron font-bold gradient-text-pink-cyan mb-4 leading-tight">
+              {post.title}
+            </h1>
+            <div className="flex items-center gap-4">
+              <time className="text-neon-cyan font-mono text-sm tracking-wider">
+                {post.publishedAt ? formatDate(post.publishedAt) : ''}
+              </time>
+            </div>
+            <div className="mt-6 h-px bg-gradient-to-r from-neon-pink via-neon-purple to-transparent" />
+          </header>
+
+          {/* Cover Image */}
+          {post.coverImage && (
+            <div className="relative aspect-[16/9] mb-10 rounded-lg overflow-hidden border border-grid/30">
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+              {/* Subtle gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-void/50 via-transparent to-transparent" />
+            </div>
+          )}
+
+          {/* Content */}
+          <PostContent content={post.content} />
+        </article>
+
+        {/* Footer */}
+        <footer className="mt-16 pt-8 border-t border-grid/30">
+          <Link
+            href="/"
+            className="inline-flex items-center px-6 py-3 bg-deep-purple border border-neon-pink text-neon-pink rounded-lg hover:shadow-neon-pink-sm transition-all group"
+          >
+            <span className="transform group-hover:-translate-x-1 transition-transform">←</span>
+            <span className="ml-2">Back to all posts</span>
+          </Link>
+        </footer>
+      </div>
     </main>
   );
 }

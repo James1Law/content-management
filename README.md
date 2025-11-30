@@ -1,11 +1,21 @@
 # Content Management System
 
-A personal blog CMS with a mobile-first admin interface for writing and publishing blog posts. Single-author system with a public-facing blog.
+A retro-futuristic personal blog CMS with an 80s Synthwave/Outrun aesthetic. Features a mobile-first admin interface for writing and publishing blog posts, wrapped in neon glows and cyberpunk styling.
+
+## Aesthetic
+
+This isn't your typical minimalist blog. Inspired by 80s Synthwave and Outrun aesthetics:
+
+- **Dark void backgrounds** with deep purple accents
+- **Neon glow effects** in pink, cyan, and orange
+- **Retro-futuristic typography** using Orbitron, Space Grotesk, and JetBrains Mono
+- **Grid backgrounds** and gradient text effects
+- **Cyberpunk UI elements** with glowing borders and hover states
 
 ## Tech Stack
 
 - **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS with custom Synthwave theme
 - **Authentication**: Firebase Auth
 - **Database**: Firestore
 - **Image Storage**: Firebase Storage
@@ -14,16 +24,17 @@ A personal blog CMS with a mobile-first admin interface for writing and publishi
 ## Features
 
 ### Public Blog
-- View published posts with cover images
-- Clean, readable typography optimized for mobile
+- Synthwave-styled post cards with neon glow on hover
+- Gradient text headings and cyberpunk typography
+- Grid background effects and smooth animations
 - Fast page loads with Next.js static generation
 
 ### Admin Dashboard
+- Neon-accented dashboard with LIVE/DRAFT status badges
 - Create, edit, and delete posts
 - Draft and publish workflow
-- Markdown editor with preview
+- Markdown editor with live preview
 - Image upload (drag-drop on desktop, camera roll on mobile)
-- Auto-save drafts
 
 ## Getting Started
 

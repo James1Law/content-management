@@ -61,7 +61,7 @@ describe('BlogPostPage', () => {
 
     render(<BlogPostPage params={{ slug: 'my-test-blog-post' }} />);
 
-    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+    expect(screen.getByText(/loading transmission/i)).toBeInTheDocument();
   });
 
   it('should display post title', async () => {
@@ -112,7 +112,7 @@ describe('BlogPostPage', () => {
     render(<BlogPostPage params={{ slug: 'non-existent' }} />);
 
     await waitFor(() => {
-      expect(screen.getByText(/post not found/i)).toBeInTheDocument();
+      expect(screen.getByText(/signal lost/i)).toBeInTheDocument();
     });
   });
 
@@ -149,7 +149,7 @@ describe('BlogPostPage', () => {
     render(<BlogPostPage params={{ slug: 'my-test-blog-post' }} />);
 
     await waitFor(() => {
-      expect(screen.getByText(/post not found/i)).toBeInTheDocument();
+      expect(screen.getByText(/signal lost/i)).toBeInTheDocument();
     });
   });
 });

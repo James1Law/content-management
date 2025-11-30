@@ -11,6 +11,63 @@ All notable development progress for this project will be documented in this fil
 
 ---
 
+## 2025-11-30 - Session 9: Synthwave UI Overhaul
+
+### Added
+- **Complete Synthwave/Outrun Visual Theme**:
+  - 80s retro-futurism aesthetic across entire application
+  - Dark backgrounds with neon accent colors
+  - Glowing neon effects and cyberpunk styling
+
+### Changed
+- **tailwind.config.ts** - Extended theme with:
+  - Custom colors: void (dark bg), deep-purple, neon-pink, neon-cyan, neon-purple, neon-orange, grid, synth-text/muted
+  - Custom fonts: Orbitron (headings), Space Grotesk (body), JetBrains Mono (code)
+  - Custom box shadows for neon glow effects
+  - Custom animations (pulse-neon, glow)
+  - Custom background gradients (synth-gradient)
+
+- **globals.css** - Added:
+  - Google Fonts import (Orbitron, Space Grotesk, JetBrains Mono)
+  - Custom utilities: .gradient-text, .gradient-text-pink-cyan, .grid-bg, .neon-border-pink/cyan
+  - Complete prose-synthwave styling for markdown content
+  - Custom scrollbar styling
+  - Neon focus outlines and selection colors
+
+- **layout.tsx** - Dark theme base classes (bg-void, text-synth-text, font-space)
+
+- **Public Pages**:
+  - Homepage with gradient text hero, grid background, neon-styled post cards
+  - PostCard with dark cards, neon glow on hover, cyan date text
+  - Blog post page with gradient title, neon-styled back buttons
+  - PostContent with prose-synthwave class for markdown
+
+- **Admin Pages**:
+  - Admin layout with neon header, pink glow, active navigation states
+  - Dashboard with neon-pink "New Post" button
+  - PostList with LIVE/DRAFT status badges (cyan/orange), neon buttons
+  - PostForm with dark inputs, neon focus states, preview toggle
+  - ImageUploader with dark drop zone, neon drag-over effects
+  - New/Edit pages with consistent synthwave styling
+
+- **Login Page**:
+  - Full synthwave treatment with grid background
+  - Glowing orbs, gradient title
+  - Dark card with neon-styled inputs
+  - Neon-pink sign-in button, Google button with hover effects
+
+### Tests
+- Updated 8 test files to match new UI text:
+  - "Not Authorized" → "Access Denied"
+  - "Loading..." → "Initializing..." / "Loading posts..." / "Loading transmission..."
+  - "Published" / "Draft" → "LIVE" / "DRAFT"
+  - "no posts yet" → "No transmissions yet"
+  - "post not found" → "Signal Lost"
+  - border-blue-500 → border-neon-cyan
+- All 163 tests passing
+
+---
+
 ## 2025-11-30 - Session 8: Firebase Configuration & Bug Fixes
 
 ### Fixed

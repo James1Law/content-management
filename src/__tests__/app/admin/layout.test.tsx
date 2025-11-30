@@ -36,7 +36,7 @@ describe("AdminLayout", () => {
       </AdminLayout>
     );
 
-    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+    expect(screen.getByText(/initializing/i)).toBeInTheDocument();
   });
 
   it("redirects to /login when user is not authenticated", async () => {

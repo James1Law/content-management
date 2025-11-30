@@ -1,21 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #0d0d0d;
+  --foreground: #f0e6ff;
+  --neon-pink: #ff2a6d;
+  --neon-cyan: #05d9e8;
+  --neon-purple: #d300c5;
+  --deep-purple: #1a0a2e;
+  --grid-color: #7b5ea7;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Synthwave utility classes */
+@layer utilities {
+  /* Gradient text effect */
+  .gradient-text {
+    background: linear-gradient(90deg, #ff2a6d, #d300c5, #05d9e8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-pink-cyan {
+    background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Grid background pattern */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(123, 94, 167, 0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(123, 94, 167, 0.15) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .grid-bg-dense {
+    background-image:
+      linear-gradient(rgba(123, 94, 167, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(123, 94, 167, 0.1) 1px, transparent 1px);
+    background-size: 25px 25px;
+  }
+
+  /* Neon border effects */
+  .neon-border-pink {
+    border: 1px solid #ff2a6d;
+    box-shadow: 0 0 5px #ff2a6d40, inset 0 0 5px #ff2a6d20;
+  }
+
+  .neon-border-cyan {
+    border: 1px solid #05d9e8;
+    box-shadow: 0 0 5px #05d9e840, inset 0 0 5px #05d9e820;
+  }
+
+  /* Scan line overlay effect */
+  .scan-lines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+}
+
+/* Prose styling for markdown content in synthwave theme */
+@layer components {
+  .prose-synthwave {
+    --tw-prose-body: #f0e6ff;
+    --tw-prose-headings: #f0e6ff;
+    --tw-prose-lead: #a89ec9;
+    --tw-prose-links: #05d9e8;
+    --tw-prose-bold: #f0e6ff;
+    --tw-prose-counters: #a89ec9;
+    --tw-prose-bullets: #ff2a6d;
+    --tw-prose-hr: #7b5ea7;
+    --tw-prose-quotes: #a89ec9;
+    --tw-prose-quote-borders: #ff2a6d;
+    --tw-prose-captions: #a89ec9;
+    --tw-prose-code: #05d9e8;
+    --tw-prose-pre-code: #f0e6ff;
+    --tw-prose-pre-bg: #1a0a2e;
+    --tw-prose-th-borders: #7b5ea7;
+    --tw-prose-td-borders: #7b5ea740;
+  }
+
+  .prose-synthwave a {
+    color: #05d9e8;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .prose-synthwave a:hover {
+    color: #ff2a6d;
+    text-shadow: 0 0 10px #ff2a6d60;
+  }
+
+  .prose-synthwave code {
+    background: #1a0a2e;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875em;
+    color: #05d9e8;
+  }
+
+  .prose-synthwave pre {
+    background: #1a0a2e;
+    border: 1px solid #7b5ea740;
+    border-radius: 8px;
+  }
+
+  .prose-synthwave pre code {
+    background: transparent;
+    padding: 0;
+    color: #f0e6ff;
+  }
+
+  .prose-synthwave blockquote {
+    border-left-color: #ff2a6d;
+    background: #1a0a2e40;
+    padding: 1em;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .prose-synthwave h1,
+  .prose-synthwave h2,
+  .prose-synthwave h3,
+  .prose-synthwave h4 {
+    font-family: 'Orbitron', sans-serif;
+    color: #f0e6ff;
+  }
+
+  .prose-synthwave strong {
+    color: #ff2a6d;
+  }
+
+  .prose-synthwave hr {
+    border-color: #7b5ea7;
+  }
+
+  .prose-synthwave table th {
+    background: #1a0a2e;
+    color: #05d9e8;
+  }
+
+  .prose-synthwave table td {
+    border-color: #7b5ea740;
+  }
+
+  .prose-synthwave ul > li::marker {
+    color: #ff2a6d;
+  }
+
+  .prose-synthwave ol > li::marker {
+    color: #05d9e8;
+  }
+}
+
+/* Custom scrollbar for synthwave theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7b5ea7;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff2a6d;
+}
+
+/* Focus outline for accessibility */
+*:focus-visible {
+  outline: 2px solid #05d9e8;
+  outline-offset: 2px;
+}
+
+/* Selection color */
+::selection {
+  background: #ff2a6d40;
+  color: #f0e6ff;
 }

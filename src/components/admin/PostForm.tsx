@@ -90,14 +90,15 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
   // - Editing draft: "Publish"
   const publishButtonText = isEditing && isPublished ? 'Update' : 'Publish';
 
+  // Common input styles
+  const inputStyles = "w-full px-4 py-3 bg-deep-purple border border-grid/50 rounded-lg text-synth-text placeholder:text-synth-muted/50 focus:outline-none focus:border-neon-cyan focus:shadow-neon-cyan-sm transition-all";
+  const labelStyles = "block text-sm font-medium text-synth-muted mb-2";
+
   return (
     <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
       {/* Title */}
       <div>
-        <label
-          htmlFor="title"
-          className="block text-sm font-medium text-gray-700 mb-1"
-        >
+        <label htmlFor="title" className={labelStyles}>
           Title
         </label>
         <input
@@ -105,35 +106,32 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full px-4 py-3 text-lg text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-400"
+          className={`${inputStyles} text-lg font-orbitron`}
           placeholder="Enter post title"
         />
         {errors.title && (
-          <p className="mt-1 text-sm text-red-600">{errors.title}</p>
+          <p className="mt-1 text-sm text-neon-pink">{errors.title}</p>
         )}
       </div>
 
       {/* Slug */}
       <div>
-        <label
-          htmlFor="slug"
-          className="block text-sm font-medium text-gray-700 mb-1"
-        >
+        <label htmlFor="slug" className={labelStyles}>
           Slug
         </label>
-        <div className="flex items-center">
-          <span className="text-gray-500 mr-1">/blog/</span>
+        <div className="flex items-center gap-2">
+          <span className="text-synth-muted font-mono text-sm">/blog/</span>
           <input
             type="text"
             id="slug"
             value={slug}
             onChange={(e) => handleSlugChange(e.target.value)}
-            className="flex-1 px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-400"
+            className={`${inputStyles} font-mono`}
             placeholder="post-slug"
           />
         </div>
         {errors.slug && (
-          <p className="mt-1 text-sm text-red-600">{errors.slug}</p>
+          <p className="mt-1 text-sm text-neon-pink">{errors.slug}</p>
         )}
       </div>
 
@@ -147,10 +145,7 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
 
       {/* Summary */}
       <div>
-        <label
-          htmlFor="summary"
-          className="block text-sm font-medium text-gray-700 mb-1"
-        >
+        <label htmlFor="summary" className={labelStyles}>
           Summary
         </label>
         <textarea
@@ -158,41 +153,42 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
           rows={2}
-          className="w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none placeholder:text-gray-400"
+          className={`${inputStyles} resize-none`}
           placeholder="Brief summary for post previews"
         />
         {errors.summary && (
-          <p className="mt-1 text-sm text-red-600">{errors.summary}</p>
+          <p className="mt-1 text-sm text-neon-pink">{errors.summary}</p>
         )}
       </div>
 
       {/* Content with Preview Toggle */}
       <div>
-        <div className="flex items-center justify-between mb-1">
-          <label
-            htmlFor="content"
-            className="block text-sm font-medium text-gray-700"
-          >
+        <div className="flex items-center justify-between mb-2">
+          <label htmlFor="content" className={labelStyles}>
             Content
           </label>
           <button
             type="button"
             onClick={() => setShowPreview(!showPreview)}
-            className="text-sm text-blue-600 hover:text-blue-800 min-h-[44px] px-3"
+            className={`text-sm min-h-[44px] px-4 py-2 rounded-lg transition-all ${
+              showPreview
+                ? 'text-neon-pink bg-neon-pink/10 border border-neon-pink/30'
+                : 'text-neon-cyan bg-neon-cyan/10 border border-neon-cyan/30'
+            }`}
           >
-            {showPreview ? 'Edit' : 'Preview'}
+            {showPreview ? '← Edit' : 'Preview →'}
           </button>
         </div>
 
         {showPreview ? (
           <div
             data-testid="markdown-preview"
-            className="w-full min-h-[300px] px-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
+            className="w-full min-h-[300px] px-4 py-3 bg-deep-purple border border-grid/50 rounded-lg"
           >
             {content ? (
               <PostContent content={content} />
             ) : (
-              <p className="text-gray-400 italic">Nothing to preview</p>
+              <p className="text-synth-muted/50 italic">Nothing to preview</p>
             )}
           </div>
         ) : (
@@ -201,12 +197,12 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={12}
-            className="w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm placeholder:text-gray-400"
+            className={`${inputStyles} font-mono text-sm`}
             placeholder="Write your post content in Markdown..."
           />
         )}
         {errors.content && (
-          <p className="mt-1 text-sm text-red-600">{errors.content}</p>
+          <p className="mt-1 text-sm text-neon-pink">{errors.content}</p>
         )}
       </div>
 
@@ -216,20 +212,33 @@ export default function PostForm({ post, onSubmit }: PostFormProps): JSX.Element
           type="button"
           onClick={() => handleSubmit('draft')}
           disabled={isSubmitting}
-          className="flex-1 min-h-[44px] px-6 py-3 text-gray-700 bg-gray-100 rounded-lg font-medium hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="flex-1 min-h-[44px] px-6 py-3 bg-deep-purple border border-grid text-synth-muted rounded-lg font-medium hover:border-neon-orange hover:text-neon-orange hover:shadow-neon-pink-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
-          {isSubmitting ? 'Saving...' : 'Save Draft'}
+          {isSubmitting ? (
+            <span className="flex items-center justify-center gap-2">
+              <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+              Saving...
+            </span>
+          ) : (
+            'Save Draft'
+          )}
         </button>
         <button
           type="button"
           onClick={() => handleSubmit('published')}
           disabled={isSubmitting}
-          className="flex-1 min-h-[44px] px-6 py-3 text-white bg-blue-600 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="flex-1 min-h-[44px] px-6 py-3 bg-neon-pink text-white rounded-lg font-medium hover:shadow-neon-pink disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
-          {isSubmitting ? 'Saving...' : publishButtonText}
+          {isSubmitting ? (
+            <span className="flex items-center justify-center gap-2">
+              <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+              Saving...
+            </span>
+          ) : (
+            publishButtonText
+          )}
         </button>
       </div>
     </form>
   );
 }
-

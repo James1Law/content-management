@@ -27,38 +27,52 @@ export default function Home(): JSX.Element {
   }, []);
 
   return (
-    <main className="min-h-screen max-w-4xl mx-auto px-4 py-12 bg-white">
-      <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-2 text-gray-900">Blog</h1>
-        <p className="text-gray-600">Thoughts, ideas, and stories</p>
-      </header>
+    <main className="min-h-screen bg-synth-gradient grid-bg">
+      <div className="max-w-5xl mx-auto px-4 py-16">
+        {/* Hero Header */}
+        <header className="mb-16 text-center">
+          <h1 className="text-5xl md:text-7xl font-orbitron font-bold mb-4 gradient-text tracking-wider">
+            BLOG
+          </h1>
+          <p className="text-synth-muted text-lg font-light tracking-wide">
+            Thoughts, ideas, and stories from the neon frontier
+          </p>
+          <div className="mt-6 h-px bg-gradient-to-r from-transparent via-neon-pink to-transparent" />
+        </header>
 
-      {loading && (
-        <div className="flex justify-center py-12">
-          <p className="text-gray-500">Loading posts...</p>
-        </div>
-      )}
+        {/* Loading State */}
+        {loading && (
+          <div className="flex flex-col items-center justify-center py-20">
+            <div className="w-12 h-12 border-2 border-neon-cyan border-t-transparent rounded-full animate-spin mb-4" />
+            <p className="text-synth-muted animate-pulse">Loading posts...</p>
+          </div>
+        )}
 
-      {error && (
-        <div className="bg-red-50 text-red-600 p-4 rounded-lg">
-          {error}
-        </div>
-      )}
+        {/* Error State */}
+        {error && (
+          <div className="bg-deep-purple border border-neon-pink/50 text-neon-pink p-6 rounded-lg shadow-neon-pink-sm text-center">
+            <p className="font-orbitron">{error}</p>
+          </div>
+        )}
 
-      {!loading && !error && posts.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-500 text-lg">No posts yet</p>
-          <p className="text-gray-400 mt-2">Check back soon for new content!</p>
-        </div>
-      )}
+        {/* Empty State */}
+        {!loading && !error && posts.length === 0 && (
+          <div className="text-center py-20">
+            <div className="text-6xl mb-6">🌌</div>
+            <p className="text-synth-text text-xl font-orbitron mb-2">No transmissions yet</p>
+            <p className="text-synth-muted">Check back soon for new content from the void</p>
+          </div>
+        )}
 
-      {!loading && !error && posts.length > 0 && (
-        <div className="grid gap-8 md:grid-cols-2">
-          {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
-          ))}
-        </div>
-      )}
+        {/* Posts Grid */}
+        {!loading && !error && posts.length > 0 && (
+          <div className="grid gap-8 md:grid-cols-2">
+            {posts.map((post) => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </div>
+        )}
+      </div>
     </main>
   );
 }

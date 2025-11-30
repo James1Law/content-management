@@ -22,8 +22,11 @@ export default function AdminLayout({
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-600">Loading...</p>
+      <div className="min-h-screen bg-void flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <div className="w-10 h-10 border-2 border-neon-cyan border-t-transparent rounded-full animate-spin mb-4" />
+          <p className="text-synth-muted">Initializing...</p>
+        </div>
       </div>
     );
   }
@@ -38,37 +41,47 @@ export default function AdminLayout({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200">
+    <div className="min-h-screen bg-void">
+      <header className="bg-deep-purple border-b border-neon-pink/30 shadow-neon-pink-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <nav className="flex items-center gap-6">
-              <Link
-                href="/admin"
-                className={`font-medium ${
-                  pathname === "/admin"
-                    ? "text-blue-600"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
-              >
-                Dashboard
-              </Link>
-              <Link
-                href="/admin/new"
-                className={`font-medium ${
-                  pathname === "/admin/new"
-                    ? "text-blue-600"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
-              >
-                New Post
-              </Link>
-            </nav>
+            {/* Logo/Brand */}
+            <div className="flex items-center gap-8">
+              <span className="font-orbitron text-lg font-bold gradient-text hidden sm:block">
+                ADMIN
+              </span>
+              <nav className="flex items-center gap-1">
+                <Link
+                  href="/admin"
+                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    pathname === "/admin"
+                      ? "text-neon-pink bg-neon-pink/10 shadow-neon-pink-sm"
+                      : "text-synth-muted hover:text-neon-cyan hover:bg-neon-cyan/5"
+                  }`}
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  href="/admin/new"
+                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    pathname === "/admin/new"
+                      ? "text-neon-pink bg-neon-pink/10 shadow-neon-pink-sm"
+                      : "text-synth-muted hover:text-neon-cyan hover:bg-neon-cyan/5"
+                  }`}
+                >
+                  New Post
+                </Link>
+              </nav>
+            </div>
+
+            {/* User info & Sign out */}
             <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-500">{user?.email}</span>
+              <span className="text-sm text-synth-muted hidden sm:block font-mono">
+                {user?.email}
+              </span>
               <button
                 onClick={handleSignOut}
-                className="text-sm text-gray-600 hover:text-gray-900 font-medium"
+                className="px-4 py-2 text-sm text-neon-orange hover:text-white hover:bg-neon-orange/20 rounded-lg transition-all font-medium"
               >
                 Sign Out
               </button>

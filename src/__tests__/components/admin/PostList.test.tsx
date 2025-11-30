@@ -62,8 +62,8 @@ describe('PostList', () => {
   it('should display status badges for each post', () => {
     render(<PostList posts={mockPosts} onDelete={mockOnDelete} />);
 
-    expect(screen.getByText('Published')).toBeInTheDocument();
-    expect(screen.getByText('Draft')).toBeInTheDocument();
+    expect(screen.getByText('LIVE')).toBeInTheDocument();
+    expect(screen.getByText('DRAFT')).toBeInTheDocument();
   });
 
   it('should display last modified date for each post', () => {
@@ -103,7 +103,7 @@ describe('PostList', () => {
   it('should display empty state when no posts exist', () => {
     render(<PostList posts={[]} onDelete={mockOnDelete} />);
 
-    expect(screen.getByText(/no posts yet/i)).toBeInTheDocument();
+    expect(screen.getByText(/no transmissions yet/i)).toBeInTheDocument();
   });
 
   it('should be mobile responsive with touch-friendly targets', () => {

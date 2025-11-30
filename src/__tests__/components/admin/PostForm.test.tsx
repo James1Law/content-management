@@ -186,11 +186,11 @@ describe('PostForm', () => {
       expect(screen.getByLabelText(/slug/i)).toHaveValue('existing-post');
     });
 
-    it('should show "Update" instead of "Publish" for existing posts', () => {
+    it('should show "Publish" for draft posts and "Update" for published posts', () => {
+      // Draft post should show "Publish"
       render(<PostForm post={existingPost} onSubmit={mockOnSubmit} />);
-
       expect(screen.getByRole('button', { name: /save draft/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /update/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /publish/i })).toBeInTheDocument();
     });
   });
 

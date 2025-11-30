@@ -33,7 +33,7 @@ export default function PostContent({ content }: PostContentProps): JSX.Element 
   };
 
   return (
-    <div className="prose prose-lg max-w-none">
+    <div className="prose prose-lg prose-synthwave max-w-none">
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {content}
       </ReactMarkdown>

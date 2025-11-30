@@ -26,17 +26,18 @@ export default function NewPostPage(): JSX.Element {
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-bold">New Post</h1>
+        <h1 className="text-2xl font-orbitron font-bold text-synth-text">New Post</h1>
         <Link
           href="/admin"
-          className="text-gray-600 hover:text-gray-800 min-h-[44px] flex items-center"
+          className="text-synth-muted hover:text-neon-cyan min-h-[44px] flex items-center transition-colors group"
         >
-          ← Back
+          <span className="transform group-hover:-translate-x-1 transition-transform">←</span>
+          <span className="ml-2">Back</span>
         </Link>
       </div>
 
       {error && (
-        <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-6">
+        <div className="bg-deep-purple border border-neon-pink/50 text-neon-pink p-4 rounded-lg mb-6 shadow-neon-pink-sm">
           {error}
         </div>
       )}

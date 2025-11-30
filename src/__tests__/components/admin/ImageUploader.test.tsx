@@ -197,9 +197,9 @@ describe('ImageUploader', () => {
     const dropZone = screen.getByTestId('drop-zone');
 
     fireEvent.dragEnter(dropZone);
-    expect(dropZone).toHaveClass('border-blue-500');
+    expect(dropZone).toHaveClass('border-neon-cyan');
 
     fireEvent.dragLeave(dropZone);
-    expect(dropZone).not.toHaveClass('border-blue-500');
+    expect(dropZone).not.toHaveClass('border-neon-cyan');
   });
 });
