@@ -51,10 +51,19 @@ export async function uploadImage(
   const storagePath = `${pathPrefix}/${uniqueFilename}`;
   const storageRef = ref(storage, storagePath);
 
-  await uploadBytes(storageRef, file);
-  const downloadUrl = await getDownloadURL(storageRef);
+  // Add timeout to detect hanging Firebase operations (usually security rules issue)
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    setTimeout(() => {
+      reject(new Error('Image upload timed out. Please check Firebase Storage security rules in the Firebase Console.'));
+    }, 30000); // 30 second timeout for uploads
+  });
 
-  return downloadUrl;
+  const uploadPromise = async (): Promise<string> => {
+    await uploadBytes(storageRef, file);
+    return getDownloadURL(storageRef);
+  };
+
+  return Promise.race([uploadPromise(), timeoutPromise]);
 }
 
 /**
